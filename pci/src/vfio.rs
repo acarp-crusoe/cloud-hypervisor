@@ -696,8 +696,7 @@ impl VfioCommon {
                         .allocate(
                             restored_bar_addr,
                             region_size,
-                            // SAFETY: FFI call. Trivially safe.
-                            Some(unsafe { sysconf(_SC_PAGESIZE) as GuestUsize }),
+                            Some(region_size),
                         )
                         .ok_or(PciDeviceError::IoAllocationFailed(region_size))?
                 }
